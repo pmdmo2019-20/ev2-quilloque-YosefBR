@@ -44,6 +44,11 @@ class ContactsFragment : Fragment(R.layout.contacts_fragment) {
         NavHostFragment.findNavController(navHostFragment)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupViews()
@@ -51,14 +56,14 @@ class ContactsFragment : Fragment(R.layout.contacts_fragment) {
     }
 
     private fun setupViews(){
+        sharedViewModel.submitContacts()
         setupRecyclerView()
         emptyView.setOnClickListener {
             navigateToCreateNewContact()
         }
         txtSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                println(p0.toString())
-                sharedViewModel.searchContact(p0.toString())
+                sharedViewModel.searchContact("%" + p0.toString() + "%")
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {

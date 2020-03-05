@@ -2,6 +2,7 @@ package es.iessaladillo.pedrojoya.quilloque.dialFragment
 
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
@@ -33,9 +34,8 @@ class DialFragment : Fragment(R.layout.dial_fragment) {
 
     private val listAdapter: DialFragmentAdapter = DialFragmentAdapter().also {
         it.setOnItemClickListener {position ->
-            it.setOnItemClickListener {
-
-            }
+            val suggestedCall: SuggestedCall = it.getItem(position)
+            lblNumber.text = suggestedCall.phoneNumber
         }
     }
 
@@ -51,7 +51,6 @@ class DialFragment : Fragment(R.layout.dial_fragment) {
     }
 
     private fun setupViews() {
-
         lblCreateContact.setOnClickListener{
             navigateToCreateContact()
         }
@@ -63,27 +62,36 @@ class DialFragment : Fragment(R.layout.dial_fragment) {
         }
         setupRecyclerView()
         fabCall.setOnClickListener {
-            var findContact = sharedViewModel.contacts.value?.find { ct -> ct.phoneNumber == lblNumber.text.toString() }
-            var contactId: Long?
-            var contactName: String
-            var phoneNumber: String
-            val date = "07/07/2020"
-            val time = "07:07"
-            val type = getCallTypeIcon("made")
-
-            if (findContact == null) {
-                contactName = "?"
-                phoneNumber = lblNumber.text.toString()
-                contactId = null
-            }
-            else {
-                contactName = findContact.name
-                phoneNumber = findContact.phoneNumber
-                contactId = findContact.id
-            }
-
-            sharedViewModel.insertRecentCall(contactName, phoneNumber, type, date, time, contactId)
+            createRecentCall("made")
+            Toast.makeText(requireContext(), "Starting call", Toast.LENGTH_SHORT).show()
         }
+        imgVideo.setOnClickListener {
+            createRecentCall("video")
+            Toast.makeText(requireContext(), "Starting video call", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun createRecentCall(typeOfCall: String) {
+        var findContact = sharedViewModel.contacts.value?.find { ct -> ct.phoneNumber == lblNumber.text.toString() }
+        var contactId: Long?
+        var contactName: String
+        var phoneNumber: String
+        val date = "07/07/2020"
+        val time = "07:07"
+        val type = getCallTypeIcon(typeOfCall)
+
+        if (findContact == null) {
+            contactName = "?"
+            phoneNumber = lblNumber.text.toString()
+            contactId = null
+        }
+        else {
+            contactName = findContact.name
+            phoneNumber = findContact.phoneNumber
+            contactId = findContact.id
+        }
+
+        sharedViewModel.insertRecentCall(contactName, phoneNumber, type, date, time, contactId)
     }
 
     private fun erase() {

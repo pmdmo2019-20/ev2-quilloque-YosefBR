@@ -63,4 +63,14 @@ class SharedViewModel(private val repository: Repository,
         }.start()
     }
 
+    fun submitContacts() {
+        Thread {
+            try {
+                contacts.postValue(repository.queryAllContacts())
+            } catch (e: Exception) {
+
+            }
+        }.start()
+    }
+
 }
