@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c36f8cf7818cc46905cfe2dcb58a5fbd",
+    "identityHash": "81d5025eb84def52c921d4b5277e938e",
     "entities": [
       {
         "tableName": "contact",
@@ -38,12 +38,18 @@
       },
       {
         "tableName": "call",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `phoneNumber` TEXT NOT NULL, `type` TEXT NOT NULL, `date` TEXT NOT NULL, `time` TEXT NOT NULL, `contactId` INTEGER NOT NULL, FOREIGN KEY(`contactId`) REFERENCES `contact`(`id`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `contactName` TEXT NOT NULL, `phoneNumber` TEXT NOT NULL, `type` INTEGER NOT NULL, `date` TEXT NOT NULL, `time` TEXT NOT NULL, `contactId` INTEGER, FOREIGN KEY(`contactId`) REFERENCES `contact`(`id`) ON UPDATE CASCADE ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
             "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "contactName",
+            "columnName": "contactName",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -55,7 +61,7 @@
           {
             "fieldPath": "type",
             "columnName": "type",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -74,7 +80,7 @@
             "fieldPath": "contactId",
             "columnName": "contactId",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -102,7 +108,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c36f8cf7818cc46905cfe2dcb58a5fbd')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '81d5025eb84def52c921d4b5277e938e')"
     ]
   }
 }

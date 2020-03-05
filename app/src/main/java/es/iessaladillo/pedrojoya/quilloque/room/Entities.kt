@@ -31,14 +31,16 @@ data class Contact (
 data class Call (
     @PrimaryKey(autoGenerate = true)
     val id: Long,
+    @ColumnInfo(name = "contactName")
+    val contactName: String,
     @ColumnInfo(name = "phoneNumber")
     val phoneNumber: String,
     @ColumnInfo(name = "type")
-    val type: String,
+    val type: Int,
     @ColumnInfo(name = "date")
     val date: String,
     @ColumnInfo(name = "time")
     val time: String,
     @ColumnInfo(name = "contactId")
-    val contactId: Long
+    val contactId: Long?
 )

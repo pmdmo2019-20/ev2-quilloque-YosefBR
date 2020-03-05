@@ -13,10 +13,10 @@ private val drawableBuilder: TextDrawable.IBuilder = TextDrawable.builder()
     .endConfig()
     .round()
 
-fun createAvatarDrawable(text: String): Drawable {
-    val firstLetter = text.substring(0, 1)
+fun createAvatarDrawable(text: String?): Drawable {
+    val firstLetter = text!!.substring(0, 1)
     return drawableBuilder.build(
-        if (firstLetter.isDigitsOnly()) "?" else firstLetter,
+        if (firstLetter!!.isDigitsOnly()) "?" else firstLetter,
         ColorGenerator.MATERIAL.getColor(text)
     )
 }

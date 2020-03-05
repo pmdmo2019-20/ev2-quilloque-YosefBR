@@ -15,13 +15,15 @@ class LocalRepository(private val contactDao: ContactDao, private val callDao: C
 
 
     //CONTACT
-    override fun queryAllContacts(): LiveData<List<Contact>> = contactDao.queryAllContacts()
+    override fun searchContact(cToSearch: String): List<Contact> = contactDao.searchContact(cToSearch)
+
+    override fun queryAllContacts(): List<Contact> = contactDao.queryAllContacts()
 
     override fun insertContact(contact: Contact) = contactDao.insertContact(contact)
 
     override fun deleteContact(contact: Contact): Int = contactDao.deleteContact(contact)
 
-    override fun suggestContact(phoneNumber: String): LiveData<List<SuggestedCall>> = contactDao.suggestContact(phoneNumber)
+    override fun suggestContact(phoneNumber: String?): List<SuggestedCall> = contactDao.suggestContact(phoneNumber)
 
 
 }

@@ -26,6 +26,7 @@ class ContactCreationFragment : Fragment(R.layout.contact_creation_fragment) {
     }
 
     private fun setupViews() {
+        txtPhoneNumber.setText(sharedViewModel.initialAddNumber)
         fabSave.setOnClickListener {
             saveNewContact()
         }

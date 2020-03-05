@@ -18,7 +18,7 @@
         app:layout_constraintBottom_toTopOf="@+id/lblTwo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="666666666" />
+        tools:text="" />
 
     <TextView
         android:id="@+id/lblOne"
@@ -244,7 +244,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        tools:visibility="invisible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

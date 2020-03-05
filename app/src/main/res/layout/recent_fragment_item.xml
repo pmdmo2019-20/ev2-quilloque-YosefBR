@@ -79,7 +79,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/imgCallType"
             app:layout_constraintStart_toEndOf="@+id/imgCallType"
             app:layout_constraintTop_toTopOf="@+id/imgCallType"
-            tools:text="No 666666666" />
+            tools:text="No 666666666"
+            android:visibility="invisible"/>
 
         <TextView
             android:id="@+id/lblCreateContact"
@@ -95,7 +96,6 @@
             app:layout_constraintBottom_toBottomOf="@+id/imgCallType"
             app:layout_constraintStart_toEndOf="@+id/imgCallType"
             app:layout_constraintTop_toTopOf="@+id/imgCallType"
-            tools:text="No 666666666"
             tools:visibility="visible" />
 
         <ImageButton

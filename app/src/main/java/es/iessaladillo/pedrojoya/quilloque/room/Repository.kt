@@ -5,10 +5,11 @@ import androidx.lifecycle.LiveData
 interface Repository {
 
     //CONTACT
-    fun queryAllContacts(): LiveData<List<Contact>>
+    fun queryAllContacts(): List<Contact>
     fun insertContact(contact: Contact)
     fun deleteContact(contact: Contact): Int
-    fun suggestContact(phoneNumber: String): LiveData<List<SuggestedCall>>
+    fun suggestContact(phoneNumber: String?): List<SuggestedCall>
+    fun searchContact(cToSearch: String): List<Contact>
 
     //CALL
     fun queryRecentCalls(limit: Int): LiveData<List<RecentCalls>>

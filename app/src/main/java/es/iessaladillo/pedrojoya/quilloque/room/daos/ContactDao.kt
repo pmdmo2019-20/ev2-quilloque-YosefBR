@@ -1,7 +1,9 @@
 package es.iessaladillo.pedrojoya.quilloque.room.daos
 
-import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
 import es.iessaladillo.pedrojoya.quilloque.room.Contact
 import es.iessaladillo.pedrojoya.quilloque.room.SuggestedCall
 
@@ -9,7 +11,7 @@ import es.iessaladillo.pedrojoya.quilloque.room.SuggestedCall
 interface ContactDao {
 
     @Query("SELECT * FROM CONTACT")
-    fun queryAllContacts(): LiveData<List<Contact>>
+    fun queryAllContacts(): List<Contact>
 
     @Insert
     fun insertContact(contact: Contact)
@@ -24,6 +26,9 @@ interface ContactDao {
             "FROM Call " +
             "WHERE phoneNumber like :phoneNumber " +
             "AND phoneNumber NOT IN (SELECT phoneNumber FROM Contact)")
-    fun suggestContact(phoneNumber: String): LiveData<List<SuggestedCall>>
+    fun suggestContact(phoneNumber: String?): List<SuggestedCall>
 
+
+    @Query("SELECT * FROM CONTACT WHERE name like :cToSearch")
+    fun searchContact(cToSearch: String): List<Contact>
 }
